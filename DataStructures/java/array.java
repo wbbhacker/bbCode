@@ -29,6 +29,7 @@ public class array {
       System.out.println("数组空间已满，没有可插入位置！");
       return false;
     }
+    return true;
   }
 
   public void printAll(){
