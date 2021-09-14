@@ -12,37 +12,37 @@ const browserSync = require('browser-sync')
 console.log('ss')
 let mdPath = path.join(__dirname, process.argv[2])
 let cssPath = path.resolve('github.css')
-let htmlPath = mdPath.replace(path.extname(mdPath),'.html')
+let htmlPath = mdPath.replace(path.extname(mdPath), '.html')
 
 console.log(mdPath)
 console.log(cssPath)
 console.log(htmlPath)
 
-fs.watchFile(mdPath,(curr, prev)=>{
-    if(curr.mtime !== prev.mtime ){
-        fs.readFile(mdPath,'utf-8',(err,data)=>{
+fs.watchFile(mdPath, (curr, prev) => {
+    if (curr.mtime !== prev.mtime) {
+        fs.readFile(mdPath, 'utf-8', (err, data) => {
             // 将md --》 html 
             let htmlStr = marked(data)
             console.log(marked)
             console.log(htmlStr)
-            fs.readFile(cssPath,'utf-8',(err,data)=>{
-                let retHtml = temp.replace('{{content}}',htmlStr).replace('{{style}}',data)
+            fs.readFile(cssPath, 'utf-8', (err, data) => {
+                let retHtml = temp.replace('{{content}}', htmlStr).replace('{{style}}', data)
                 // 将上述的内容写入到指定的html 文件中，用于浏览器里进行展示
-        
-                fs.writeFile(htmlPath,retHtml,()=>{
+
+                fs.writeFile(htmlPath, retHtml, () => {
                     console.log('生成成功了')
                 })
             })
         })
-        
+
     }
 })
 
 browserSync.init({
-    broswer:'',
-    server:__dirname,
-    watch:true,
-    index:path.basename(htmlPath)
+    broswer: '',
+    server: __dirname,
+    watch: true,
+    index: path.basename(htmlPath)
 })
 
 const temp = `

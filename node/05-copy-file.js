@@ -12,23 +12,23 @@ let readOffset = 0
 fs.open('a1.txt', 'r', (err, rfd) => {
   fs.open('b1.txt', 'w', (err, wfd) => {
     function next() {
-        fs.read(rfd, buf, 0, BUFFER_SIZE, readOffset, (err, readBytes, buffer) => {
-          // 打开b文件写入数据
-          console.log(readBytes)
-          if (!readBytes) {
-            // 如果条件成立，说明内容已经读取完毕
-            fs.close(rfd, () => { })
-            fs.close(wfd, () => { })
-            console.log('拷贝完成')
-            return
-          }
-          console.log(readBytes)
-          readOffset += readBytes
-          fs.write(wfd, buf, 0, readBytes, (err, written) => {
-            console.log('写入成功')
-            next()
-          })
+      fs.read(rfd, buf, 0, BUFFER_SIZE, readOffset, (err, readBytes, buffer) => {
+        // 打开b文件写入数据
+        console.log(readBytes)
+        if (!readBytes) {
+          // 如果条件成立，说明内容已经读取完毕
+          fs.close(rfd, () => { })
+          fs.close(wfd, () => { })
+          console.log('拷贝完成')
+          return
+        }
+        console.log(readBytes)
+        readOffset += readBytes
+        fs.write(wfd, buf, 0, readBytes, (err, written) => {
+          console.log('写入成功')
+          next()
         })
+      })
     }
     next()
   })
