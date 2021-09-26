@@ -36,8 +36,6 @@ function preoderTraversal(node) {
   return res
 }
 
-
-
 // console.log(preoderTraversal(binaryTree))
 
 // 中序遍历结果: [4,2,5,1,6,3,7]
@@ -79,6 +77,7 @@ function postorderTraversal(node) {
 
 
 /****迭代****/
+
 // 前序遍历结果：[1,2,4,5,3,6,7]
 function preorderIterated(node) {
   let stack = [node]
@@ -113,6 +112,9 @@ function preorderIterated1(node) {
   return res
 }
 console.log(preorderIterated1(binaryTree))
+
+
+
 // 中序遍历结果:[4,2,5,1,6,3,7]
 function inorderIterated(node) {
   let stack = []
