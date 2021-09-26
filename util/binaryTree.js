@@ -19,26 +19,24 @@ let binaryTree = ArrayToTreeNode(arr)
 console.log(binaryTree)
 
 // Deep First Search  深度优先搜索
-
+/****递归****/
 // 前序遍历结果：[1,2,4,5,3,6,7]
 function preoderTraversal(node) {
   let res = []
   bfs(node)
   function bfs(node) {
-
     res.push(node.val)
-
     if (node.left !== null) {
       bfs(node.left)
     }
     if (node.right !== null) {
       bfs(node.right)
     }
-
-
   }
   return res
 }
+
+
 
 // console.log(preoderTraversal(binaryTree))
 
@@ -79,6 +77,8 @@ function postorderTraversal(node) {
 // console.log(postorderTraversal(binaryTree))
 
 
+
+/****迭代****/
 // 前序遍历结果：[1,2,4,5,3,6,7]
 function preorderIterated(node) {
   let stack = [node]
@@ -97,11 +97,23 @@ function preorderIterated(node) {
   }
   return res
 }
-
+function preorderIterated1(node) {
+  let stack = []
+  let cur = node
+  let res = []
+  while (cur || stack.length > 0) {
+    while (cur) {
+      res.push(cur.val)
+      stack.push(cur)
+      cur = cur.left
+    }
+    cur = stack.pop()
+    cur = cur.right
+  }
+  return res
+}
+console.log(preorderIterated1(binaryTree))
 // 中序遍历结果:[4,2,5,1,6,3,7]
-
-
-
 function inorderIterated(node) {
   let stack = []
   let cur = node
@@ -120,11 +132,9 @@ function inorderIterated(node) {
 
 
 // 后序遍历结果:   [4,5,2,6,7,3,1]
-
 // 方法1. 先头、右、左遍历，保存在栈中，之后输出栈 左、右、头。tips：先遍历、在输出
 // 方法2.  tips：边遍历，边输出。  
 // 方法3. 链表实现
-
 function posorderIterated(node) {
 
   let stack = [{ flag: 0, node: node }]
@@ -186,6 +196,6 @@ function posorderIterated2(node) {
   return res
 }
 
-console.log(posorderIterated(binaryTree))
-console.log(posorderIterated1(binaryTree))
-console.log(posorderIterated2(binaryTree))
+// console.log(posorderIterated(binaryTree))
+// console.log(posorderIterated1(binaryTree))
+// console.log(posorderIterated2(binaryTree))
