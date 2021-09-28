@@ -21,7 +21,7 @@ console.log(binaryTree)
 // Deep First Search  深度优先搜索
 /****递归****/
 // 前序遍历结果：[1,2,4,5,3,6,7]
-function preoderTraversal(node) {
+function preorderTraversal(node) {
   let res = []
   bfs(node)
   function bfs(node) {
@@ -79,6 +79,7 @@ function postorderTraversal(node) {
 /****迭代****/
 
 // 前序遍历结果：[1,2,4,5,3,6,7]
+// 两种遍历的本质不同是：切换到右字树的机制不一样
 function preorderIterated(node) {
   let stack = [node]
   let cur = null
