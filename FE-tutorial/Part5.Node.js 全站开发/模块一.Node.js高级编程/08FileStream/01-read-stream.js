@@ -1,16 +1,16 @@
 const fs = require('fs')
 const EventEmitter = require('events')
 
-class MyFileReadStream extends EventEmitter{
+class MyFileReadStream extends EventEmitter {
   constructor(path, options = {}) {
     super()
     this.path = path
     this.flags = options.flags || "r"
     this.mode = options.mode || 438
-    this.autoClose = options.autoClose || true 
+    this.autoClose = options.autoClose || true
     this.start = options.start || 0
-    this.end = options.start 
-    this.highWaterMark = options.highWaterMark || 64 * 1024 
+    this.end = options.start
+    this.highWaterMark = options.highWaterMark || 64 * 1024
 
     this.open()
   }
