@@ -16,8 +16,6 @@ function ArrayToTreeNode(arrayTree) {
 let arr = [1, 2, 3, 4, 5, 6, 7]
 let binaryTree = ArrayToTreeNode(arr)
 
-console.log(binaryTree)
-
 // Deep First Search  深度优先搜索
 /****递归****/
 // 前序遍历结果：[1,2,4,5,3,6,7]
@@ -198,7 +196,7 @@ function posorderIterated2(node) {
   }
   return res
 }
-
 // console.log(posorderIterated(binaryTree))
 // console.log(posorderIterated1(binaryTree))
-// console.log(posorderIterated2(binaryTree))
+console.log(posorderIterated2(binaryTree))
+
