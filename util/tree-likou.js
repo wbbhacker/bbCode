@@ -12,59 +12,86 @@ function ArrayToTreeNode(arrayTree) {
   }
 }
 
-// 树的子结构
-let A = ArrayToTreeNode([4,2,3,4,5,6,7,8,9])
-let B = ArrayToTreeNode([4,8,9])
-console.log(isSubStructure(A,B))
+// 
+
+let A = ArrayToTreeNode([5,3,6,2,4,null,null,1])
 console.log(A)
-function isSubStructure(A, B) {
-  if(B === null || A === null) return false;
-  const bStack = []
-  let aStack = []
-  let acur = A
-  let bcur = B
-  let stack = []
-  while( acur || aStack.length > 0){
-    while (acur) {
-        if (acur.val === bcur.val) { 
-          stack.push(acur)
-        }
-        aStack.push(acur)
-        acur = acur.left
-      }
-      if(aStack.length > 0){
-          acur = aStack.pop()
-          acur = acur.right
-      }
-  }
-  let flag = true 
-  while (stack.length > 0) {
-    acur = stack.pop()
-    while( (bcur || bStack.length > 0) && flag ){
-        while(bcur !== null ){
-          if (acur === null) { 
-            flag = false
-            break;
-          }
-          if (bcur.val !== acur.val) { 
-            flag = false
-            break;
-          }
-            aStack.push(acur)
-            bStack.push(bcur)
-            bcur = bcur.left
-            acur = acur.left
-        }
-        if(bStack.length > 0 ){
-            acur = aStack.pop()
-            bcur = bStack.pop()
-            bcur = bcur.right
-            acur = acur.right
-        }
-    }
-    if (flag) { 
-      return true
-    }
-  }
-  return false
+var inorderSuccessor = function(root, p) {
+  
+ if(root === null) return null
+ let cur = root
+ let isLeft = null
+ let parent = null
+ while(cur.val !== p){
+     if(cur.val > p){
+         parent = cur
+         cur = cur.left
+         isLeft = true
+     }else{
+         cur = cur.right
+         isLeft = false
+     }
+   
+   if (cur === null) { return null}
+ }
+ return isLeft ?  cur.right !== null ? cur.right.val : parent.val  : cur.right.val 
 };
+
+let res = inorderSuccessor(A, 4)
+console.log(res)
+// 树的子结构
+// let A = ArrayToTreeNode([4,2,3,4,5,6,7,8,9])
+// let B = ArrayToTreeNode([4,8,9])
+// console.log(isSubStructure(A,B))
+// console.log(A)
+// function isSubStructure(A, B) {
+//   if(B === null || A === null) return false;
+//   const bStack = []
+//   let aStack = []
+//   let acur = A
+//   let bcur = B
+//   let stack = []
+//   while( acur || aStack.length > 0){
+//     while (acur) {
+//         if (acur.val === bcur.val) { 
+//           stack.push(acur)
+//         }
+//         aStack.push(acur)
+//         acur = acur.left
+//       }
+//       if(aStack.length > 0){
+//           acur = aStack.pop()
+//           acur = acur.right
+//       }
+//   }
+//   let flag = true 
+//   while (stack.length > 0) {
+//     acur = stack.pop()
+//     while( (bcur || bStack.length > 0) && flag ){
+//         while(bcur !== null ){
+//           if (acur === null) { 
+//             flag = false
+//             break;
+//           }
+//           if (bcur.val !== acur.val) { 
+//             flag = false
+//             break;
+//           }
+//             aStack.push(acur)
+//             bStack.push(bcur)
+//             bcur = bcur.left
+//             acur = acur.left
+//         }
+//         if(bStack.length > 0 ){
+//             acur = aStack.pop()
+//             bcur = bStack.pop()
+//             bcur = bcur.right
+//             acur = acur.right
+//         }
+//     }
+//     if (flag) { 
+//       return true
+//     }
+//   }
+//   return false
+// };

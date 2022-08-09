@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    html,
+    body,
+    div,
+    a,
+    span,
+    img {
+      padding: 0;
+      margin: 0;
+    }
+
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="width:100%;height:100%;">
+    <canvas id="canvas"></canvas>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function (params) {
+      Init()
+    })
+
+    function Init() {
+      let canvas = document.getElementById('canvas')
+      let ctx = canvas.getContext('2d')
+
+      // 设置画布大小
+      canvas.width = document.body.offsetWidth
+      canvas.height = document.body.offsetHeight
+
+      // 监听事件
+      canvas.addEventListener('touchstart', onActDown)
+      canvas.addEventListener('touchend', onActUp)
+
+      canvas.addEventListener('mousedown', onActDown)
+      canvas.addEventListener('mouseup', onActUp)
+
+      draw({
+        circleColor: '#000',
+        circleSolidColor: '#000',
+        rectColor: '#000',
+        quadraticCurveColor: '#000'
+      })
+
+      window.addEventListener('resize',()=>{
+        console.log('sss')
+        canvas.width = document.body.offsetWidth
+        canvas.height = document.body.offsetHeight
+        draw({
+          circleColor: '#000',
+          circleSolidColor: '#000',
+          rectColor: '#000',
+          quadraticCurveColor: '#000'
+        })
+      })
+
+      // 鼠标点击事件
+      function onActDown(e) {
+        let point = e.touches ? e.touches[0] : e
+        let upPoint = { x: point.clientX, y: point.clientY }
+        // console.log(`点击坐标: x:${upPoint.x} y:${upPoint.y}`)
+
+        // 空心圆
+        // 把圆心放到坐标系(0,0)
+        let cricleCenter = {
+          x: upPoint.x - 150,
+          y: upPoint.y - 150
+        }
+        //圆的方程式  x*x + y*y = r*r  r为半径
+        // x*x + y*y === r*r 时 命中圆上，因很不好点击到，可两者相差n时，为点中状态。 n越大越容易点中
+        let n = 120
+        if (Math.abs(Math.pow(cricleCenter.x, 2) + Math.pow(cricleCenter.y, 2) - 50 * 50) <= n) {
+          draw({
+            circleColor: '#f00',
+            circleSolidColor: '#000',
+            rectColor: '#000',
+            quadraticCurveColor:'#000'
+          })
+        }
+
+        // 实心圆
+        //  x*x + y*y <= r*r 时 
+        // 原理同空心圆
+        let cricleCenterSolid = {
+          x: upPoint.x - 400,
+          y: upPoint.y - 150
+        }
+        if (Math.pow(cricleCenterSolid.x, 2) + Math.pow(cricleCenterSolid.y, 2) <= 50 * 50) {
+
+          draw({
+            circleColor: '#000',
+            circleSolidColor: '#f00',
+            rectColor: '#000',
+            quadraticCurveColor:'#000'
+          })
+
+        }
+
+        // 圆角矩形
+        // 因1宽度的线很不好点击到，设置阀值, m越大越容易点中
+        let rect = {
+          x: upPoint.x - 100, // renderRect 从（100，400）开始画的
+          y: upPoint.y - 400
+        }
+        let m = 6
+        // 上边命中判断
+        if (rect.x >= 0 && rect.x <= 700 && rect.y <= -50 && rect.y >= -50 - m) {
+          draw({
+            circleColor: '#000',
+            circleSolidColor: '#000',
+            rectColor: '#f00',
+            quadraticCurveColor:'#000'
+          })
+        }
+        //下边命中判断
+        if (rect.x >= 0 && rect.x <= 700 && rect.y >= 350 && rect.y <= 350 + m) {
+          draw({
+            circleColor: '#000',
+            circleSolidColor: '#000',
+            rectColor: '#f00',
+            quadraticCurveColor:'#000'
+          })
+        }
+        // 左边判断
+        if (rect.x <= -50 && rect.x >= -50 - m && rect.y >= 0 && rect.y <= 300) {
+          draw({
+            circleColor: '#000',
+            circleSolidColor: '#000',
+            rectColor: '#f00',
+            quadraticCurveColor:'#000'
+          })
+        }
+        // 右边判断
+        if (rect.x <= 750 + 6 && rect.x >= 750 && rect.y >= 0 && rect.y <= 300) {
+          draw({
+            circleColor: '#000',
+            circleSolidColor: '#000',
+            rectColor: '#f00',
+            quadraticCurveColor:'#000'
+          })
+        }
+
+        // 左上角4分之一圆判断命中
+
+        if (rect.x < 0 && rect.y < 0) {
+          if (Math.abs(Math.pow(rect.x, 2) + Math.pow(rect.y, 2) - 50 * 50) <= n) {
+            draw({
+              circleColor: '#000',
+              circleSolidColor: '#000',
+              rectColor: '#f00',
+              quadraticCurveColor:'#000'
+            })
+          }
+        }
+        // 右上角4分之一圆判断命中
+        let rect1 = {
+          x: rect.x - 700,
+          y: rect.y
+        }
+        if (rect1.x > 0 && rect1.y < 0) {
+          if (Math.abs(Math.pow(rect1.x, 2) + Math.pow(rect1.y, 2) - 50 * 50) <= n) {
+            draw({
+              circleColor: '#000',
+              circleSolidColor: '#000',
+              rectColor: '#f00',
+              quadraticCurveColor:'#000'
+            })
+          }
+        }
+        // 右下角4分之一 圆判断命中
+        let rect2 = {
+          x: rect1.x,
+          y: rect1.y - 300
+        }
+        if (rect2.x > 0 && rect2.y > 0) {
+          if (Math.abs(Math.pow(rect2.x, 2) + Math.pow(rect2.y, 2) - 50 * 50) <= n) {
+            draw({
+              circleColor: '#000',
+              circleSolidColor: '#000',
+              rectColor: '#f00',
+              quadraticCurveColor:'#000'
+            })
+          }
+        }
+
+        // 左下角4分之一 圆判断命中
+
+        let rect3 = {
+          x: rect.x,
+          y: rect.y - 300
+        }
+
+        if (rect3.x < 0 && rect3.y > 0) {
+          if (Math.abs(Math.pow(rect3.x, 2) + Math.pow(rect3.y, 2) - 50 * 50) <= n) {
+            draw({
+              circleColor: '#000',
+              circleSolidColor: '#000',
+              rectColor: '#f00',
+              quadraticCurveColor:'#000'
+            })
+          }
+        }
+        // p0（550,150） p1（650,100）  p2（750,150）
+        // ax*x + b*x + c = 0
+        let p0x = 550
+        let p1x = 650
+        let p2x = 750
+        let a = p0x - 2 * p1x + p2x // 0
+        let b = 2 * p1x - 2 * p0x //200
+        let c = p0x - upPoint.x
+
+        let t_x = -1 * c / b // x坐标求出来的t 值 
+
+        let p0y = 150
+        let p1y = 100
+        let p2y = 150
+        let ay = p0y - 2 * p1y + p2y // 100
+        let by = 2 * p1y - 2 * p0y  // -100
+        let cy = p0y - upPoint.y
+
+        let san = by * by - 4 * ay * cy
+        if (t_x >= 0 && t_x <= 1) {
+          if (san > 0) {
+            let t_y = (-1 * by - Math.sqrt(by * by - 4 * ay * cy)) / (2 * ay) // 第一个解
+            let t_y1 = (-1 * by + Math.sqrt(by * by - 4 * ay * cy)) / (2 * ay) //第二个解
+           
+            if ( Math.abs(t_y+t_x - 1) < 0.2 || Math.abs(t_y1+t_x - 1) < 0.1) {
+              draw({
+                circleColor: '#000',
+                circleSolidColor: '#000',
+                rectColor: '#000',
+                quadraticCurveColor:'#f00'
+              })
+            }
+          }
+        }
+
+      }
+
+
+      // 鼠标松开事件
+      function onActUp(e) {
+        draw({
+          circleColor: '#000',
+          circleSolidColor: '#000',
+          rectColor: '#000',
+          quadraticCurveColor: '#000'
+        })
+      }
+
+      /*
+      * option.circleColor 空心圆颜色
+      * option.circleSolidColor 实心圆颜色
+      * option.rectColor 圆角矩形颜色
+      * option.quadraticCurveColor 
+      */
+
+      function draw(option) {
+        const {
+          circleColor,
+          circleSolidColor,
+          rectColor,
+          quadraticCurveColor
+        } = option
+        clearCanvas(ctx)
+        renderCircle(circleColor)
+        renderCircleSolid(circleSolidColor)
+        renderRect(rectColor)
+        renderQuadraticCurve(quadraticCurveColor)
+      }
+
+
+      function renderCircle(color) {
+        ctx.beginPath()
+        ctx.strokeStyle = color
+        // 在point (150,150) 画半径为50 的圆
+        ctx.lineWidth = 6
+        ctx.arc(150, 150, 50, 0, 2 * Math.PI)
+        ctx.stroke()
+      }
+
+      function renderCircleSolid(color) {
+        ctx.beginPath()
+        ctx.strokeStyle = color
+        // 在point (400,150) 画半径为50 的圆
+        ctx.lineWidth = 6
+        ctx.fillStyle = color;
+        ctx.arc(400, 150, 50, 0, 2 * Math.PI)
+        ctx.fill()
+
+      }
+
+      function renderRect(color) {
+        ctx.beginPath()
+        ctx.strokeStyle = color
+        // 在point (100,400) 出开始画, 即 (100,400) 为坐标系的(0,0)
+        ctx.lineWidth = 6
+
+        ctx.arc(100, 400, 50, Math.PI, 3 * Math.PI / 2) //第一个圆的 4分之一，左上角
+        ctx.lineTo(800, 350) // 画线至第二个圆
+        ctx.arc(800, 400, 50, 3 * Math.PI / 2, 2 * Math.PI) // 第二个圆的 4分之一，右上角
+        ctx.lineTo(850, 700)
+        ctx.arc(800, 700, 50, 0, Math.PI / 2)
+        ctx.lineTo(100, 750)
+        ctx.arc(100, 700, 50, Math.PI / 2, Math.PI)
+        ctx.lineTo(50, 400)
+        ctx.stroke()
+
+      }
+
+
+      function renderQuadraticCurve(color) {
+        // （550,150） （650,100）  （750,150）
+        ctx.beginPath()
+        ctx.strokeStyle = color
+        ctx.lineWidth = 6
+        ctx.moveTo(550, 150)
+        ctx.quadraticCurveTo(650, 100, 750, 150)
+        ctx.stroke()
+      }
+
+    }
+
+    // 清空画布
+    function clearCanvas(ctx) {
+      ctx.clearRect(0, 0, document.body.offsetWidth, document.body.offsetHeight)
+    }
+
+  </script>
+</body>
+
+</html>

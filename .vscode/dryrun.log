@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/binbin.wang/workspace/Git/bbCode'
+make: Leaving directory `/Users/binbin.wang/workspace/Git/bbCode'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+

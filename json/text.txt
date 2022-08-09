@@ -1,0 +1,54 @@
+校验类型：Check type
+失败策略：failure strategy
+数据源：data source
+数据库：database
+表名：Table Name
+规则条件：rule condition
+规则名称：rule name
+规则描述：Rule description
+报警方式：Alarm method
+联系方式：contact details
+规则字段：rule field
+规则模版：rule template
+比较方式：way of comparison
+期望值：expected value
+逻辑：logic
+操作：operate
+新增对比规则：Add a comparison rule
+请输入规则条件： enter rule conditions
+请输入规则名称： enter a rule name
+请输入规则描述： enter a rule description
+请选择报警方式： select an alarm method
+请输入联系方式： enter contact information
+请选择规则字段： select a rule field
+请选择规则模版： select a rule template
+请选择比较方式： select a comparison method
+请输入自定义SQL：enter custom SQL
+请输入期望值： enter desired value
+自定义SQL：custom SQL
+联系方式：contact way
+多个联系方式以；号隔开：Multi in; separated
+报警方式：alarm way
+钉钉：dingding
+短信：SMS
+电话：phone
+邮件：mail
+删除：Delete
+与：and
+或：or
+请选择数据源：select a data source
+请选择数据库：select a database
+请选择schema：select a schema
+请选择表名：select a table name
+告警：alarm
+阻断：block
+平均值：average
+最大值：maximum
+最小值：minimum 
+汇总值：summary
+去重行数：deduplicated rows
+行数：rows
+为空值：null
+原始值：Original
+问题反馈：feedback
+新建：create
