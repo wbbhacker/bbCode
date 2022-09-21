@@ -1,19 +1,9 @@
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var minStartValue = function (nums) {
-  let minValue = Number.MAX_SAFE_INTEGER
-  let prevValue = 0
-  for (let i = 0; i < nums.length; i++) { 
-    let sumValue = prevValue + nums[i]
-    if (sumValue < minValue) { 
-      minValue = sumValue
-    }
-    prevValue = sumValue
-  }
-  return minValue >= 1 ? 1  : 1-minValue
-}
+window.addEventListener('unhandledrejection', function(event) {
+  // the event object has two special properties:
+  console.log(event.promise); // [object Promise] - the promise that generated the error
+  console.log(event.reason); // Error: Whoops! - the unhandled error object
+});
 
-
-console.log(minStartValue([1,2]))
+new Promise(function() {
+  throw new Error("Whoops!");
+}); 
