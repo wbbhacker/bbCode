@@ -1,19 +1,12 @@
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var minStartValue = function (nums) {
-  let minValue = Number.MAX_SAFE_INTEGER
-  let prevValue = 0
-  for (let i = 0; i < nums.length; i++) { 
-    let sumValue = prevValue + nums[i]
-    if (sumValue < minValue) { 
-      minValue = sumValue
+var specialArray = function (nums) {
+  nums.sort((a, b) => b - a);
+  const n = nums.length;
+  for (let i = 1; i <= n; ++i) {
+    if (nums[i - 1] >= i && (i === n || nums[i] < i)) {
+      return i;
     }
-    prevValue = sumValue
   }
-  return minValue >= 1 ? 1  : 1-minValue
-}
+  return -1;
+};
 
-
-console.log(minStartValue([1,2]))
+console.log(specialArray([0, 4, 3, 0, 4]))
