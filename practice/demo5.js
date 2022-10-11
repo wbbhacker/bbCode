@@ -1,21 +1,32 @@
-var specialArray = function (nums) {
-  nums.sort((a, b) => b - a);
-  const n = nums.length;
-  for (let i = 1; i <= n; ++i) {
-    if (nums[i - 1] >= i && (i === n || nums[i] < i)) {
-      return i;
-    }
+function $new(fn) { // 模拟new 操作符
+  let obj = new Object(),
+    args = Array.prototype.slice.call(arguments, 1)
+  let result
+  obj.__proto__ = fn.prototype
+  result = fn.apply(obj, args)
+  return typeof result === 'object' ? result : obj
+}
+function person(type) { // 测试
+  this.name = 'world'
+  switch (type) {
+    case 1:
+      return 1
+    case 2:
+      return {}
   }
-  return -1;
-};
+}
+person.prototype.say = function () {
+  console.log(`my name is ${this.name}`)
+}
+let a = $new(person, 1)
+let b = $new(person, 2, 3)
+console.log(a) // person { name: 'world' }
+console.log(b) // {}
+console.log(a.__proto__ === person.prototype)
+// true
+console.log(b.__proto__ === person.prototype)
+// false
 
-console.log(specialArray([0, 4, 3, 0, 4]))
-window.addEventListener('unhandledrejection', function (event) {
-  // the event object has two special properties:
-  console.log(event.promise); // [object Promise] - the promise that generated the error
-  console.log(event.reason); // Error: Whoops! - the unhandled error object
-});
 
-new Promise(function () {
-  throw new Error("Whoops!");
-}); 
+
+
