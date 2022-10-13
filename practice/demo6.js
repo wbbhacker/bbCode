@@ -15,7 +15,11 @@
 // // 打印：true，绑定的对象失效
 'use strict'
 
-const fn = function (params) {
-  return fn.call()
+
+function factorial(n, returnVal = 1) {
+  'use strict';
+  if (n <= 1) return returnVal;
+  return factorial(n - 1, n * returnVal);
 }
-fn.call()
+
+factorial(2000000)

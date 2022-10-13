@@ -8,22 +8,13 @@
   </head>
   <body>
     <script>
-      Function.prototype._call = function (v, ...args) {
-        // this在_call指向的是目标函数 本例指fn
-        v.fn = this
-        // 把this 复制给v的一个属性并执行，
-        // 是改变目标函数执行时this的指向.
-        // 即this指向v
-        return v.fn(...args)
-      }
-      const obj = {
-        name: '关注@程序员阿彬',
-      }
-      const fn = function () {
-        console.log(this.name)
-        console.log(arguments)
-      }
-      fn._call(obj, 1, 2)
+      // 'use strict'
+      // function fn() {
+      //   console.count()
+      //   return fn.call()
+      // }
+      // fn()
+      console.log(Math.pow(3, 100000000000))
     </script>
   </body>
 </html>
