@@ -8,13 +8,12 @@
   </head>
   <body>
     <script>
-      // 'use strict'
-      // function fn() {
-      //   console.count()
-      //   return fn.call()
-      // }
-      // fn()
-      console.log(Math.pow(3, 100000000000))
+      'use strict'
+      const fn = function () {
+        console.log('尾调用')
+        return fn.call()
+      }
+      fn()
     </script>
   </body>
 </html>
