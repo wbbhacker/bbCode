@@ -1,43 +1,17 @@
-var Trie = function() {
-  this.children = {};
-};
-
-Trie.prototype.insert = function(word) {
-  let node = this.children;
-  for (const ch of word) {
-      if (!node[ch]) {
-          node[ch] = {};
-      }
-      node = node[ch];
-  }
-  node.isEnd = true;
-};
-
-Trie.prototype.searchPrefix = function(prefix) {
-  let node = this.children;
-  for (const ch of prefix) {
-      if (!node[ch]) {
-          return false;
-      }
-      node = node[ch];
-  }
-  return node;
+function A() {
+  this.name = 'xiaofang'
 }
 
-Trie.prototype.search = function(word) {
-  const node = this.searchPrefix(word);
-  return node !== undefined && node.isEnd !== undefined;
-};
+let B = new A()
 
-Trie.prototype.startsWith = function(prefix) {
-  return this.searchPrefix(prefix);
-};
-
-var obj = new Trie()
-
-obj.insert('apple')
-
-console.log(obj.search("apple"))
-console.log(obj.search("app"))
+console.log(B.__proto__ === A.prototype)
 
 
+console.log(B.prototype)
+
+
+// B.__proto__
+// B.prototype
+
+// A.__proto__
+// A.__proto__.__proto__

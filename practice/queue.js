@@ -1,53 +1,53 @@
 /**
  * @param {number} k
  */
- var MyCircularQueue = function(k) {
-   this.queue = new Array(k)
-   this.frontIdx = 0
-   this.rearidx = 0
-   console.log(this.queue[0])
+var MyCircularQueue = function (k) {
+  this.queue = new Array(k)
+  this.frontIdx = 0
+  this.rearidx = 0
+  console.log(this.queue[0])
 };
 
 /** 
  * @param {number} value
  * @return {boolean}
  */
-MyCircularQueue.prototype.enQueue = function(value) {
+MyCircularQueue.prototype.enQueue = function (value) {
 
 };
 
 /**
  * @return {boolean}
  */
-MyCircularQueue.prototype.deQueue = function() {
+MyCircularQueue.prototype.deQueue = function () {
 
 };
 
 /**
  * @return {number}
  */
-MyCircularQueue.prototype.Front = function() {
+MyCircularQueue.prototype.Front = function () {
 
 };
 
 /**
  * @return {number}
  */
-MyCircularQueue.prototype.Rear = function() {
+MyCircularQueue.prototype.Rear = function () {
 
 };
 
 /**
  * @return {boolean}
  */
-MyCircularQueue.prototype.isEmpty = function() {
+MyCircularQueue.prototype.isEmpty = function () {
 
 };
 
 /**
  * @return {boolean}
  */
-MyCircularQueue.prototype.isFull = function() {
+MyCircularQueue.prototype.isFull = function () {
 
 };
 
