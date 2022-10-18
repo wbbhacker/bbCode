@@ -9,20 +9,85 @@
 
   <body>
     <script>
-      let value = 2
-      let foo = { value: 1 }
-      function bar(name, age) {
-        console.count()
-        console.log(this)
-        console.log(`value:${this.value}`)
+      // function log(...args) {
+      //   // console.log(this instanceof log === true)
+      //   // console.log(this, ...args)
+      // }
+      // const boundLog = log.bind('关注', 1, 2)
+      // console.log(new boundLog() instanceof log === true)
+      // const boundLog2 = boundLog.bind('点赞', 3, 4)
+
+      // console.log(boundLog2 instanceof log === true)
+      // var value = 2
+      // let foo = { value: 1 }
+
+      // function bar(name, age) {
+      //   console.log(this.value)
+      // }
+
+      // let instance = new bar()
+      // let bindFoo = bar.bind(foo)
+      // let bindInstance = new bindFoo('18')
+
+      // console.log(bar())
+      // bindFoo()
+      // console.log(bindInstance.__proto__ === bar.prototype)
+      // console.log(bindFoo.prototype)
+
+      // function log(...args) {
+      //   console.log(this, ...args)
+      // }
+      // // console.log(log.prototype)
+      // const boundLog = log.bind('this value', 1, 2)
+      // let instance = new boundLog()
+      // console.log(instance)
+      // console.log(instance.__proto__ === log.prototype)
+      // // const boundLog2 = boundLog.bind('new this value', 3, 4)
+      // // boundLog2(5, 6) // "this value", 1, 2, 3, 4, 5, 6
+
+      Function.prototype._bind = function (thisArgs, ...args) {
+        let F = this
+        let bridge = function () {}
+        bridge.prototype = F.prototype
+        const boundFunction = function (...boundArgs) {
+          let applyArgs = args.concat(boundArgs)
+          if (this instanceof boundFunction) {
+            return new F(...applyArgs)
+          } else {
+            return F.apply(thisArgs, applyArgs)
+          }
+        }
+        boundFunction.prototype = new bridge()
+        return boundFunction
       }
-      let a = new bar()
-      let bindFoo = bar.bind(foo)
-      console.log(bindFoo())
-      let obj = new bindFoo('18')
-      console.log('*******************************')
-      console.log(obj.__proto__)
-      console.log(bindFoo.prototype)
+
+      let fn = function () {}
+
+      fn.prototype.say = function () {
+        console.log('1')
+      }
+
+      let fnBind = fn._bind(null)
+      fnBind.prototype.say = function () {
+        console.log('2')
+      }
+
+      let ins = new fn()
+      ins.say()
+
+      // let fn = function () {
+      //   console.log(this.name)
+      // }
+      // let fnBind = fn._bind({ name: 1 }, 1, 2)
+      // fnBind()
+      // new fnBind()
+      // let fnBindBind = fnBind._bind({ name: 2 }, 3, 4)
+      // fnBind()
+      // fnBindBind()
+      // console.log(fnBind.prototype === fn.prototype)
+      // console.log(new fn() instanceof fnBind)
     </script>
   </body>
 </html>
+
+undefined undefined 2 undefined 1 undefined true undefined
