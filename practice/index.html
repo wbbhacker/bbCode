@@ -6,32 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+
   <body>
     <script>
-      let fn = function (a, b) {}
-      fn.prototype.say = function () {
-        console.log('a')
+      let value = 2
+      let foo = { value: 1 }
+      function bar(name, age) {
+        console.count()
+        console.log(this)
+        console.log(`value:${this.value}`)
       }
-      let fnBound = fn.bind(null)
-      let instance = new fnBound()
-      // console.log(instance.__proto__ === fn.prototype)
-      // console.log(new fnBound())
-
-      let a = {}
-      a.__proto__ = Function.prototype
-      a.caller = function () {
-        this.name = 's'
-      }
-      a.name = 'a'
-
-      console.log(a)
-      // console.log(new a())
-      console.dir(fn)
-      console.dir(fnBound)
-      console.log(fnBound.prototype)
-
-      console.log()
-      // console.log(fn.prototype)
+      let a = new bar()
+      let bindFoo = bar.bind(foo)
+      console.log(bindFoo())
+      let obj = new bindFoo('18')
+      console.log('*******************************')
+      console.log(obj.__proto__)
+      console.log(bindFoo.prototype)
     </script>
   </body>
 </html>
