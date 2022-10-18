@@ -8,12 +8,30 @@
   </head>
   <body>
     <script>
-      'use strict'
-      const fn = function () {
-        console.log('尾调用')
-        return fn.call()
+      let fn = function (a, b) {}
+      fn.prototype.say = function () {
+        console.log('a')
       }
-      fn()
+      let fnBound = fn.bind(null)
+      let instance = new fnBound()
+      // console.log(instance.__proto__ === fn.prototype)
+      // console.log(new fnBound())
+
+      let a = {}
+      a.__proto__ = Function.prototype
+      a.caller = function () {
+        this.name = 's'
+      }
+      a.name = 'a'
+
+      console.log(a)
+      // console.log(new a())
+      console.dir(fn)
+      console.dir(fnBound)
+      console.log(fnBound.prototype)
+
+      console.log()
+      // console.log(fn.prototype)
     </script>
   </body>
 </html>
