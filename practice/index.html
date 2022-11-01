@@ -9,15 +9,17 @@
 
   <body>
     <script>
-      showName()
-      var showName = function () {
-        console.log(2)
+      var name = 'global scope'
+      function person() {
+        var name = 'function scope'
+        let eye = 'black'
+        say()
       }
-      function showName() {
-        console.log(1)
+      function say() {
+        var text = '阿彬'
+        console.log(name)
       }
+      person()
     </script>
   </body>
 </html>
-
-undefined undefined 2 undefined 1 undefined true undefined
