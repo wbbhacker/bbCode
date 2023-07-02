@@ -18,15 +18,15 @@ let binaryTree = ArrayToTreeNode(arr)
 console.log(binaryTree)
 
 
-function perorderTraversal(node){
+function perorderTraversal(node) {
   const res = []
   dfs(node)
-  function dfs(node){
+  function dfs(node) {
     res.push(node.val)
-    if(node.left){
+    if (node.left) {
       dfs(node.left)
     }
-    if(node.right){
+    if (node.right) {
       dfs(node.right)
     }
   }
@@ -34,12 +34,12 @@ function perorderTraversal(node){
 }
 
 
-function perorderIterated(node){
+function perorderIterated(node) {
   let stack = []
   let cur = node
   let res = []
-  while(cur || stack.length > 0 ){
-    while(cur){
+  while (cur || stack.length > 0) {
+    while (cur) {
       res.push(cur.val)
       stack.push(cur)
       cur = cur.left
@@ -52,27 +52,27 @@ function perorderIterated(node){
 
 
 
-function inorderTraversal(node){
+function inorderTraversal(node) {
   const res = []
   dfs(node)
-  function dfs(node){
-    if(node.left){
+  function dfs(node) {
+    if (node.left) {
       dfs(node.left)
     }
     res.push(node.val)
-    if(node.right){
+    if (node.right) {
       dfs(node.right)
     }
   }
   return res
 }
 
-function inorderIterated(node){
+function inorderIterated(node) {
   let stack = []
   let cur = node
   let res = []
-  while(cur ||  stack.length>0){
-    while(cur){
+  while (cur || stack.length > 0) {
+    while (cur) {
       stack.push(cur)
       cur = cur.left
     }
@@ -83,45 +83,42 @@ function inorderIterated(node){
   return res
 }
 
-function posorderTraversal(node){
+function posorderTraversal(node) {
   const res = []
   dfs(node)
-  function dfs(node){
-    if(node.left){
+  function dfs(node) {
+    if (node.left) {
       dfs(node.left)
     }
-    if(node.right){
+    if (node.right) {
       dfs(node.right)
     }
-    
+
     res.push(node.val)
   }
   return res
 }
 
 
-function posorderIterated(node){
+function posorderIterated(node) {
   let stack = []
   let res = []
   let cur = node
-   let  prev = null
-  while(cur || stack.length >0 ){
-    while(cur){
+  let prev = null
+  while (cur || stack.length > 0) {
+    while (cur) {
       stack.push(cur)
       cur = cur.left
     }
     let temp = stack.pop()
-    if(!temp.right || temp.right === prev ){
+    if (!temp.right || temp.right === prev) {
       res.push(temp.val)
       prev = temp
-    }else{
+    } else {
       stack.push(temp)
       cur = temp.right
-    }   
+    }
   }
   return res
 }
 
-const result = posorderIterated(binaryTree)
-
-console.log(result)
