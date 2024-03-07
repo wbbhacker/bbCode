@@ -1,36 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
+            .box {
+                box-sizing: border-box;
+                width: 100px;
+                height: 100px;
+                padding: 10px;
+                border: 10px solid #f00;
+                word-wrap: break-word;
+                overflow: hidden;
+                margin: 20px;
+            }
+        </style>
+    </head>
 
-    .box {
-      box-sizing: border-box;
-      width: 100px;
-      height: 100px;
-      padding: 10px;
-      border: 10px solid #f00;
-      word-wrap: break-word;
-      overflow: hidden;
-      margin: 20px;
-    }
-  </style>
-</head>
+    <body>
+        <div class="box"></div>
+        <script>
+            async function foo() {
+                console.log('foo'); // await console.log('foo') 就搞不明白怎么回事了？
+            }
+            async function bar() {
+                console.log('bar start');
+                await foo();
+                console.log('bar end');
+            }
+            console.log('script start');
+            setTimeout(function () {
+                console.log('setTimeout');
+            }, 0);
+            bar();
+            new Promise(function (resolve) {
+                console.log('promise executor');
+                resolve();
+            }).then(function () {
+                console.log('promise then');
+            });
+            console.log('script end');
+            /*
+            script start
+            bar start
+            promise executor
+            script end
+            foo
 
-<body>
-  <div class="box">
-    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  </div>
-  <script>
-  </script>
-</body>
-
+            bar end
+            promise then
+            setTimeout
+            */
+        </script>
+    </body>
 </html>

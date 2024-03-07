@@ -12,33 +12,34 @@ function ArrayToTreeNode(arrayTree) {
   }
 }
 
-// 
-
 let A = ArrayToTreeNode([5,3,6,2,4,null,null,1])
-console.log(A)
-var inorderSuccessor = function(root, p) {
-  
- if(root === null) return null
- let cur = root
- let isLeft = null
- let parent = null
- while(cur.val !== p){
-     if(cur.val > p){
-         parent = cur
-         cur = cur.left
-         isLeft = true
-     }else{
-         cur = cur.right
-         isLeft = false
-     }
-   
-   if (cur === null) { return null}
- }
- return isLeft ?  cur.right !== null ? cur.right.val : parent.val  : cur.right.val 
-};
 
-let res = inorderSuccessor(A, 4)
-console.log(res)
+
+
+// console.log(A)
+// var inorderSuccessor = function(root, p) {
+  
+//  if(root === null) return null
+//  let cur = root
+//  let isLeft = null
+//  let parent = null
+//  while(cur.val !== p){
+//      if(cur.val > p){
+//          parent = cur
+//          cur = cur.left
+//          isLeft = true
+//      }else{
+//          cur = cur.right
+//          isLeft = false
+//      }
+   
+//    if (cur === null) { return null}
+//  }
+//  return isLeft ?  cur.right !== null ? cur.right.val : parent.val  : cur.right.val 
+// };
+
+// let res = inorderSuccessor(A, 4)
+// console.log(res)
 // 树的子结构
 // let A = ArrayToTreeNode([4,2,3,4,5,6,7,8,9])
 // let B = ArrayToTreeNode([4,8,9])
